@@ -32,8 +32,10 @@ jobs:
           at: ~/project
       - docker/build:
           image: marteoma/pizzas-back
+          tag: "latest"
       - docker/push:
           image: marteoma/pizzas-back
+          tag: "latest"
   update:
     executor: aws-cli/default
     steps:
@@ -44,7 +46,9 @@ workflows:
   deploy:
     jobs:
       - package
-      - build:
+      - docker/publish:
+          image: marteoma/pizzas-back
+          tag: latest
           requires:
             - package
       - update:
