@@ -4,12 +4,12 @@ orbs:
   aws-cli: circleci/aws-cli@1.0.0
 maven: &maven
   working_directory: ~/project
-  environment:
-    MYSQL_DB_HOST: $MYSQL_DB_HOST
-    MYSQL_DB_PORT: $MYSQL_DB_PORT
-    MYSQL_DB_DATABASE: $MYSQL_DB_DATABASE
-    MYSQL_DB_USER: $MYSQL_DB_USER
-    MYSQL_DB_PASSWORD: $MYSQL_DB_PASSWORD
+  # environment:
+  #   MYSQL_DB_HOST: $MYSQL_DB_HOST
+  #   MYSQL_DB_PORT: $MYSQL_DB_PORT
+  #   MYSQL_DB_DATABASE: $MYSQL_DB_DATABASE
+  #   MYSQL_DB_USER: $MYSQL_DB_USER
+  #   MYSQL_DB_PASSWORD: $MYSQL_DB_PASSWORD
   docker:
     - image: maven:3.6-openjdk-8
 jobs:
@@ -22,7 +22,7 @@ jobs:
           command: mvn package
       - persist_to_workspace:
           root: ~/project
-          paths: target/
+          paths: .
   build:
     executor: docker/docker
     steps:
