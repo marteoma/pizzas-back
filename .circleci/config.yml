@@ -53,4 +53,4 @@ workflows:
             - package
       - update:
           requires:
-            - build
+            - docker/publish
