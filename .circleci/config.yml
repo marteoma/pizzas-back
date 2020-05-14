@@ -23,7 +23,7 @@ jobs:
       - checkout
       - run:
           name: Build jar and test
-          command: mvn package
+          command: mvn package -DskipTests
       - persist_to_workspace:
           root: ~/project
           paths: target/
