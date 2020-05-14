@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  dockerorb: circleci/docker@1.0.1
+  docker: circleci/docker@1.0.1
   aws-cli: circleci/aws-cli@1.0.0
 maven: &maven
   working_directory: ~/project
@@ -12,6 +12,10 @@ maven: &maven
     MYSQL_DB_PASSWORD: $MYSQL_DB_PASSWORD
   docker:
     - image: maven:3.6-openjdk-8
+docker: &docker
+  working_directory: ~/project
+  docker:
+    - image: docker
 jobs:
   package:
     <<: *maven
@@ -24,15 +28,15 @@ jobs:
           root: ~/project
           paths: target/
   build:
-    executor: dockerorb/default
+    <<: *docker
     steps:
       - attach_workspace:
           at: ~/project
-      - docker/build:
-          image: marteoma/pizzas-back
-          tag: latest
-      - docker/push:
-          image: marteoma/pizzas-back
+      - run:
+          name: Generate image
+          command: docker build -t marteoma/pizzas-back:latest .
+      # - docker/push:
+      #     image: marteoma/pizzas-back
   update:
     executor: aws-cli/default
     steps:
