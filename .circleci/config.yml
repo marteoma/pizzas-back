@@ -1,0 +1,51 @@
+version: 2.1
+orbs:
+  docker: circleci/docker@1.0.1
+  aws-cli: circleci/aws-cli@1.0.0
+maven: &maven
+  working_directory: ~/project
+  environment:
+    MYSQL_DB_HOST: $MYSQL_DB_HOST
+    MYSQL_DB_PORT: $MYSQL_DB_PORT
+    MYSQL_DB_DATABASE: $MYSQL_DB_DATABASE
+    MYSQL_DB_USER: $MYSQL_DB_USER
+    MYSQL_DB_PASSWORD: $MYSQL_DB_PASSWORD
+  docker:
+    - image: maven:3.6-openjdk-8
+jobs:
+  package:
+    <<: *maven
+    steps:
+      - checkout
+      - run:
+          name: Build jar and test
+          command: mvn package
+      - persist_to_workspace:
+          root: ~/project
+          paths: target/
+  build:
+    executor: docker/default
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - docker/build:
+          image: marteoma/pizzas-back
+          tag: latest
+      - docker/push:
+          image: marteoma/pizzas-back
+  update:
+    executor: aws-cli/default
+    steps:
+      - aws-cli/install
+      - aws-cli/setup
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - package
+      - build:
+          requires:
+            - package
+      - update:
+          requires:
+            - build
