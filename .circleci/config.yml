@@ -33,7 +33,7 @@ jobs:
       - docker/build:
           image: marteoma/pizzas-back
       - docker/push:
-          image: marteoma/pizzas-back:latest
+          image: marteoma/pizzas-back
   update:
     executor: aws-cli/default
     steps:
