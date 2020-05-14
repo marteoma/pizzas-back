@@ -31,7 +31,8 @@ jobs:
       - attach_workspace:
           at: ~/project
       - docker/build:
-          image: marteoma/pizzas-back:latest
+          image: marteoma/pizzas-back
+          tag: latest
       - docker/push:
           image: marteoma/pizzas-back:latest
   update:
