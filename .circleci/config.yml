@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  docker: circleci/docker@1.0.1
+  dockerorb: circleci/docker@1.0.1
   aws-cli: circleci/aws-cli@1.0.0
 maven: &maven
   working_directory: ~/project
@@ -24,7 +24,7 @@ jobs:
           root: ~/project
           paths: target/
   build:
-    executor: docker/default
+    executor: dockerorb/default
     steps:
       - attach_workspace:
           at: ~/project
