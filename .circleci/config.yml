@@ -26,13 +26,14 @@ jobs:
   build:
     executor: docker/docker
     steps:
+      - setup_remote_docker      
+      - docker/check
       - attach_workspace:
           at: ~/project
       - docker/build:
-          image: marteoma/pizzas-back
-          tag: latest
+          image: marteoma/pizzas-back:latest
       - docker/push:
-          image: marteoma/pizzas-back
+          image: marteoma/pizzas-back:latest
   update:
     executor: aws-cli/default
     steps:
