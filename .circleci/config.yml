@@ -46,11 +46,9 @@ workflows:
   deploy:
     jobs:
       - package
-      - docker/publish:
-          image: marteoma/pizzas-back
-          tag: latest
+      - build:
           requires:
             - package
       - update:
           requires:
-            - docker/publish
+            - build
