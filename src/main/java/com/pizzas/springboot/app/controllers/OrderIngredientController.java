@@ -29,6 +29,12 @@ public class OrderIngredientController {
 	@Autowired
 	private IOrderService orderService;
 
+	@GetMapping("/hello")
+	@ResponseStatus(code = HttpStatus.OK)
+	public String hello() {
+		return "This is  what I want to see";
+	}
+
 	@GetMapping("/orderingredient")
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<OrderIngredient> list() {
