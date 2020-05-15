@@ -21,9 +21,6 @@ jobs:
           name: sleep
           command: sleep 30
       - run:
-          name: ls
-          command: ls
-      - run:
           name: Build jar and test
           command: mvn package
       - persist_to_workspace:
