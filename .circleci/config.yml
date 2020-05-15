@@ -4,12 +4,6 @@ orbs:
   aws-cli: circleci/aws-cli@1.0.0
 maven: &maven
   working_directory: ~/project
-  # environment:
-  #   MYSQL_DB_HOST: $MYSQL_DB_HOST
-  #   MYSQL_DB_PORT: $MYSQL_DB_PORT
-  #   MYSQL_DB_DATABASE: $MYSQL_DB_DATABASE
-  #   MYSQL_DB_USER: $MYSQL_DB_USER
-  #   MYSQL_DB_PASSWORD: $MYSQL_DB_PASSWORD
   docker:
     - image: maven:3.6-openjdk-8
 jobs:
@@ -43,7 +37,7 @@ jobs:
       - aws-cli/setup
       - run:
           name: Update service
-          command: aws ecs update-service --cluster demo --service nginx --force-new-deployment
+          command: aws ecs update-service --cluster backend-pizzas-cluster --service pizzasback --force-new-deployment > /dev/null
 workflows:
   version: 2
   deploy:
