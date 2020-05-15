@@ -30,6 +30,9 @@ jobs:
       #       done
       #       echo Failed waiting for MySQL && exit 1
       - run:
+          name: ls
+          command: ls
+      - run:
           name: Build jar and test
           command: mvn package
       - persist_to_workspace:
