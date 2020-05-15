@@ -32,7 +32,7 @@ public class OrderIngredientController {
 	@GetMapping("/hello")
 	@ResponseStatus(code = HttpStatus.OK)
 	public String hello() {
-		return "This is  what I want to see";
+		return "AMP";
 	}
 
 	@GetMapping("/orderingredient")
