@@ -12,15 +12,14 @@ jobs:
       - image: maven:3.6-openjdk-8
       - image: circleci/mysql:8.0.4
         environment:
-          MYSQL_ROOT_PASSWORD: $MYSQL_DB_PASSWORD
-          MYSQL_DATABASE: $MYSQL_DB_DATABASE
-          MYSQL_USER: $MYSQL_DB_USER
-          MYSQL_PASSWORD: $MYSQL_DB_PASSWORD      
+          MYSQL_ROOT_PASSWORD: passw0rd
+          MYSQL_DATABASE: pizzasdb
+          MYSQL_USER: root
     steps:
       - checkout
       - run:
           name: sleep
-          command: sleep 10
+          command: sleep 30
       - run:
           name: ls
           command: ls
