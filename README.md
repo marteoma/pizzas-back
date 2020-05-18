@@ -1,3 +1,6 @@
+[![RampUp](https://circleci.com/gh/marteoma/pizzas-back/tree/master.svg?style=shield
+)](https://app.circleci.com/pipelines/github/marteoma/pizzas-back)
+
 # Pizzas-backend
 
 Spring Boot project for pizzas app ``` run on port 8080 ```
